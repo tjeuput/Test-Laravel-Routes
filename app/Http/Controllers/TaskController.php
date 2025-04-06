@@ -35,16 +35,32 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+//    public function store(Request $request)
+//    {
+//        $validated = $request->validate([ 'name' => 'required']);
+//
+//       Task::create([
+//            'name' => $request->name,
+//            'user_id'=> auth()->id()
+//        ]);
+//
+//
+//        return redirect()->route('tasks.index');
+//
+//
+//    }
+
     public function store(Request $request)
     {
-        $validated = $request->validate([ 'name' => 'required']);
+        $validated = $request->validate(['name' => 'required']);
 
-        return Task::create([
-            'name' => $request->name,
-            'user_id'=> auth()->id()
+        // The code below won't run due to dd() above
+        $task = Task::create([
+            'name' => $validated['name'],
+            'user_id' => auth()->id()
         ]);
 
-
+        return redirect()->route('tasks.index');
     }
 
     /**
